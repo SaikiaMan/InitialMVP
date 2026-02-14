@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "topic": "Stack",
+    "level": "beginner"
+  },
+
+  "objects": [
+    {
+      "id": "stack_container",
+      "type": "rect",
+      "x": 300,
+      "y": 300,
+      "width": 120,
+      "height": 200,
+      "color": "#cccccc"
+    },
+    {
+      "id": "item_1",
+      "type": "rect",
+      "x": 300,
+      "y": 260,
+      "width": 120,
+      "height": 40,
+      "color": "#4caf50"
+    }
+  ],
+
+  "timeline": [
+    { "t": 0, "action": "show", "target": "stack_container" },
+    { "t": 1, "action": "show", "target": "item_1" },
+    { "t": 2, "action": "move", "target": "item_1", "y": 320 }
+  ]
+}

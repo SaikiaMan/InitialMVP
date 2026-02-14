@@ -1,0 +1,31 @@
+{
+  "svg": "/output/stack_push.svg",
+  "scene": {
+    "stack_container": {
+      "type": "rect",
+      "x": 300,
+      "y": 200,
+      "width": 120,
+      "height": 200,
+      "fill": "#cccccc",
+      "visible": false
+    },
+
+    "item_1": {
+      "type": "rect",
+      "x": 300,
+      "y": 160,
+      "width": 120,
+      "height": 40,
+      "fill": "#4caf50",
+      "visible": false
+    }
+  },
+
+  "timeline": [
+    { "t": 0, "action": "show", "target": "stack_container", "description": "Stack container appears" },
+    { "t": 1, "action": "show", "target": "item_1", "description": "Push first item" },
+    { "t": 2, "action": "move", "target": "item_1", "y": 40, "description": "Item moves into stack" },
+    { "t": 3, "action": "highlight", "target": "item_1", "color": "orange", "description": "Top of stack highlighted" }
+  ]
+}

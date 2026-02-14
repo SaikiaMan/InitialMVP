@@ -1,0 +1,12 @@
+{
+  "lessons": [
+    {
+      "name": "Stack Lesson",
+      "file": "stack_lesson.json"
+    },
+    {
+      "name": "Stack Push",
+      "file": "stack_push.json"
+    }
+  ]
+}

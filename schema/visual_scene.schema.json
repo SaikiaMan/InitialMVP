@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/visual-lesson.schema.json",
+  "title": "VisualLesson",
+  "description": "Schema for LLM-generated visual lessons rendered via SVG",
+  "type": "object",
+  "required": ["scene", "timeline"],
+  "additionalProperties": false,
+
+  "properties": {
+    "svg": {
+      "type": "string",
+      "description": "Path or URL to the SVG asset"
+    },
+    "meta": {
+      "type": "object",
+      "description": "Optional metadata",
+      "properties": {
+        "topic": { "type": "string" },
+        "level": { "type": "string" }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "description": "All visual objects that can be animated",
+      "additionalProperties": {
+        "$ref": "#/$defs/sceneObject"
+      }
+    },
+
+    "timeline": {
+      "type": "array",
+      "description": "Time-based animation steps",
+      "items": {
+        "$ref": "#/$defs/timelineStep"
+      }
+    }
+  },
+
+  "$defs": {
+    "sceneObject": {
+      "type": "object",
+      "required": ["type", "x", "y"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["rect", "circle", "text"],
+          "description": "Visual primitive type"
+        },
+        "x": {
+          "type": "number",
+          "description": "X position in pixels"
+        },
+        "y": {
+          "type": "number",
+          "description": "Y position in pixels"
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (rect only)"
+        },
+        "height": {
+          "type": "number",
+          "description": "Height (rect only)"
+        },
+        "radius": {
+          "type": "number",
+          "description": "Radius (circle only)"
+        },
+        "text": {
+          "type": "string",
+          "description": "Displayed text (text only)"
+        },
+        "fill": {
+          "type": "string",
+          "default": "#2196f3"
+        },
+        "visible": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+
+    "timelineStep": {
+      "type": "object",
+      "required": ["t", "action", "target"],
+      "additionalProperties": false,
+      "properties": {
+        "t": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Time in seconds"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["show", "hide", "move", "highlight"],
+          "description": "Action to perform"
+        },
+        "target": {
+          "type": "string",
+          "description": "ID of scene object"
+        },
+        "x": {
+          "type": "number",
+          "description": "New X position"
+        },
+        "y": {
+          "type": "number",
+          "description": "New Y position"
+        },
+        "color": {
+          "type": "string",
+          "description": "Highlight color"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable explanation for this step"
+        }
+      },
+
+      "allOf": [
+        {
+          "if": {
+            "properties": { "action": { "const": "move" } }
+          },
+          "then": {
+            "anyOf": [
+              { "required": ["x"] },
+              { "required": ["y"] }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": { "action": { "const": "highlight" } }
+          },
+          "then": {
+            "required": ["color"]
+          }
+        }
+      ]
+    }
+  }
+}

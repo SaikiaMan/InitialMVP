@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#visual {
+  margin-top: 20px;
+}
+
+#visual rect[id] {
+  display: none;
+}
+
+/* Smooth animation for scene elements (rects, not g) */
+#visual rect[id] {
+  transition: transform 0.4s ease, stroke 0.25s ease, stroke-width 0.2s ease;
+}
+
+#caption {
+  font-size: 18px;
+  margin-top: 12px;
+}
+
+/* Highlight style - color set from JS per step */
+.highlight {
+  stroke-width: 3px;
+}
